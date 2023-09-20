@@ -125,6 +125,31 @@
         .progress-bar-animated-9 {
             animation: fillProgress9 10s ease-in-out; /* Adjust the animation duration as needed */
         }
+
+		/* CSS for animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+		#output-container {
+			display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /* height: 200px; */
+		}
+
+        .animated-line {
+            animation: fadeIn 0.5s ease-in-out;
+			text-align: left;
+        }
 	</style>
 
 	<body class="bg-black text-white">
@@ -203,12 +228,26 @@
 		<div class="mt-5 mb-5">
             <button id="startButton" class="btn btn-secondary">Education</button>
             <div class="terminal-text mt-3">
-            <!-- Text will be typed here -->
+            <!--  Education text will be text here -->
             </div>
 		</div>
 		<div class="mt-5 mb-5">
+			<button id="showButtons" class="btn btn-secondary">Professional Experience</button>
+			<div id="additionalButtons" style="display: none;" class="mt-2 mb-2">
+				<div class="mt-2 mb-2">
+				<button class="btn btn-secondary" id = "printFrontiir">Frontiir Co.,Ltd (2019-Present)</button>
+				<div id="output-container">
+				<div id="output-frontiir" class="mt-2 mb-2"><!-- Text will be typed here --></div>
+				</div>
+				</div>
+				<!-- <div class="mt-2 mb-2">
+				<button class="btn btn-secondary">Some Co.,Ltd (2023-current)</button>
+				</div> -->
+			</div>
+		</div>
+		<div class="mt-5 mb-5">
 			<a href="mailto:nanoohlaing237@gmail.com" class="btn btn-secondary">
-				Contact
+				Contact Me
 			</a>
 			<button class="btn btn-secondary" onclick="openLinkedInProfile()">
 				linkedin
@@ -242,8 +281,47 @@
                     }
                 }, 50); // Adjust typing speed (milliseconds per character)
             }
+
             // Add a click event listener to the button to trigger the animation
             document.getElementById('startButton').addEventListener('click', typeText);
+
+			// JavaScript to toggle the visibility of additional buttons
+            document.getElementById('showButtons').addEventListener('click', function () {
+				// Disable the button to prevent repeated clicks
+                document.getElementById('showButtons').disabled = true;
+                const additionalButtons = document.getElementById('additionalButtons');
+
+                // Check the current display style and toggle it
+                if (additionalButtons.style.display === 'none' || additionalButtons.style.display === '') {
+                additionalButtons.style.display = 'block';
+                } else {
+                additionalButtons.style.display = 'none';
+                }
+			});
+
+			// JavaScript to print frontiir exp button
+			document.getElementById("printFrontiir").addEventListener("click", function() {
+
+				// Disable the button to prevent repeated clicks
+                document.getElementById('printFrontiir').disabled = true;
+				var outputDiv = document.getElementById("output-frontiir");
+				outputDiv.innerHTML = "";
+
+				var lines = [
+                    "May 2019 - Aug 2019 : Internship (Front-end Developer) Grade - 2.2",
+                    "Sep 2019 - Nov 2021 : Associate Software Engineer (Back-end Developer) Grade - 3.1",
+                    "Nov 2021 - Nov 2021 : Senior Associate Software Engineer (Back-end Developer) Grade - 4.0",
+                    "Apr 2023 - Present  : Software Engineer (Back-end Developer) Grade - 5.0",
+                ];
+				lines.forEach(function(line, index) {
+                    setTimeout(function() {
+                        var paragraph = document.createElement("p");
+                        paragraph.textContent = line;
+                        paragraph.classList.add("animated-line");
+                        outputDiv.appendChild(paragraph);
+                    }, 500 * index); // Delay each line by 500 milliseconds
+                });
+			})
 		</script>
 		<footer>
 			<div class="container">
