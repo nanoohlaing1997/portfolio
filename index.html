@@ -9,13 +9,21 @@
 	</head>
 
 	<style>
+        .mysql-prompt {
+            margin: 0; /* Reset margin for the "mysql>" prompt */
+            color: #00ff00; /* Green color for the prompt text */
+        }
 		/* Custom CSS for the content */
-		.content {
+        .content {
+            text-align: left;
 			font-family: monospace; /* Use a monospace font for a terminal look */
-			background-color: #333; /* Dark background color */
+			/* background-color: #333; */
 			color: white; /* White text color */
 			padding: 10px;
 			border-radius: 10px;
+            overflow-x: auto;
+            margin: 0;
+            border: 1px solid white;
 		}
 		/* Custom styling for '+' and '-' characters */
 		.content::before,
@@ -162,11 +170,19 @@
 		<div class="row mb-3">
             <div class="col-12">
                 <div class="content">
-                    +----+------------------+--------------------------+---------------+---------------+----------------------------+<br>
-                    | id | name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | email &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| date_of_birth | phone_number &nbsp;| occupation &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |<br>
-                    +----+------------------+--------------------------+---------------+---------------+----------------------------+<br>
-                    |  1 | Mr. Nan Oo Hlaing | nanoohlaing237@gmail.com | 1997-01-21 &nbsp; &nbsp;| +959795540857 | back-end software engineer |<br>
-                    +----+------------------+--------------------------+---------------+---------------+----------------------------+
+                    <pre class="mysql-prompt">mysql&gt; select * from users;</pre>
++----+---------------+--------------------------+---------------+----------------------------+<br>
+| id | name &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; | email &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| phone_number &nbsp;| occupation &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |<br>
++----+---------------+--------------------------+---------------+----------------------------+<br>
+| &nbsp;1&nbsp;| Nan Oo Hlaing | nanoohlaing237@gmail.com | +959795540857 | back-end software engineer |<br>
++----+---------------+--------------------------+---------------+----------------------------+<br>
+
+                    <pre class="mysql-prompt">mysql&gt; select * from user_infos where user_id = 1;</pre>
++----+---------+--------+---------------+-----------------+-------------+<br>
+| id | user_id | gender | date_of_birth | address &nbsp; &nbsp; &nbsp; &nbsp; | nationality |<br>
++----+---------+--------+---------------+-----------------+-------------+<br>
+| &nbsp;1&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;| Male&nbsp;&nbsp;&nbsp;| 1997-01-21 &nbsp; &nbsp;| yangon,myanmar &nbsp;| burmese &nbsp;&nbsp;&nbsp;&nbsp;|<br>
++----+---------+--------+---------------+-----------------+-------------+
                 </div>
             </div>
         </div>
@@ -235,7 +251,7 @@
 			<button id="showButtons" class="btn btn-secondary">Professional Experience</button>
 			<div id="additionalButtons" style="display: none;" class="mt-2 mb-2">
 				<div class="mt-2 mb-2">
-				<button class="btn btn-secondary" id = "printFrontiir">Frontiir Co.,Ltd (2019-Present)</button>
+				<button class="btn btn-secondary" id = "printFrontiir">Frontiir Co., Ltd (2019-Present)</button>
 				<div id="output-container">
 				<div id="output-frontiir" class="mt-2 mb-2"><!-- Text will be typed here --></div>
 				</div>
@@ -325,8 +341,14 @@
 		</script>
 		<footer>
 			<div class="container">
-			  <p>Copyright &copy; 2023 Nan Oo Hlaing</p>
+			  <p>&copy; <span id="currentYear"></span> Copyright by Nan Oo Hlaing</p>
 			</div>
 		</footer>
+        <script>
+            // JavaScript code to set the current year in the footer
+            const currentYearElement = document.getElementById("currentYear");
+            const currentYear = new Date().getFullYear();
+            currentYearElement.textContent = currentYear;
+        </script>
 	</body>
 </html>
